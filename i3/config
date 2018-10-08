@@ -1,0 +1,314 @@
+#
+# Copyright:
+# 	2018 delightfulagony
+#
+# Author:
+# 	delightfulagony
+# 	agony.root@protonmail.com
+# 	https://github.com/delightfulagony/
+#
+# Original repo:
+# 	https://github.com/delightfulagony/dotfiles
+#
+# Disclaimer:
+# 	This config file is intended to work with various pieces of software
+# 	specified in:
+# 	https://github.com/delightfulagony/dotfiles/blob/master/README.md#Dependencies
+#
+# LICENSE:
+# 	This file is licensed under the MIT License
+# 	(https://opensource.org/licenses/MIT)
+#
+# You can see the complete i3 config reference in
+# https://i3wm.org/docs/userguide.html 
+
+# i3 config file (v4)
+
+#################################
+#	Initial configs		#
+#################################
+# Mod key
+set $mod Mod4
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Autostart Compton.
+exec compton
+
+# Start a terminal
+# This is my personal preferred shortcut, I feel like it's intuitive and fast
+bindsym $mod+Return exec i3-sensible-terminal # My default terminal is urxvt
+
+# Start rofi program launcher
+## This is the substitute of dmenu
+bindsym $mod+d exec rofi -show combi -modi combi -lines 10 -matching fuzzy -color-enabled
+
+#################################
+#	Font & keyboard		#
+#################################
+# Font used in window titles
+font pango:Source Code Pro 8
+
+# Define keyboard layout
+set $keyboard "es"
+
+# Keyboard layout
+exec setxkbmap -layout $keyboard
+
+# Restarting the keyboard layout in case it resets to 'default'
+exec_always setxkbmap $keyboard
+
+# Turn numeric keypad on
+exec numlockx &
+
+#################################
+#	Locking			#
+#################################
+# Set lock command
+bindsym $mod+shift+x exec i3lock --color=#000000
+# Set xautolock to 10 minutes
+exec_always xautolock -time 10 -locker "i3lock --color=#000000"  &
+# Set xss-lock
+# exec_always xss-lock --notifier=/usr/share/doc/xss-lock/dim-screen.sh -- i3lock --color=#000000 &
+
+#################################
+#	Workspace managing	#
+#################################
+# Workspaces variables
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $ws0 "-1"
+
+# Switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+masculine workspace $ws0 ## Warning: This keybind will only work on 'es' keyboards
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+masculine move container to workspace $ws0 	## Warning: This keybind will only
+								## work on 'es' keyboards
+
+#################################
+#	Container managing	#
+#################################
+# Set variables for move keys 
+set $kright "l"
+set $kup "k"
+set $kdown "j"
+set $kleft "h"
+
+# Changing focus
+bindsym $mod+$kleft focus left
+bindsym $mod+$kdown focus down
+bindsym $mod+$kup focus up
+bindsym $mod+$kright focus right
+
+	# Alternatively, you can use the cursor keys
+	bindsym $mod+Left focus left
+	bindsym $mod+Down focus down
+	bindsym $mod+Up focus up
+	bindsym $mod+Right focus right
+
+# Focus urgent container
+bindsym $mod+x [urgent=latest] focus
+
+# Move focused container
+bindsym $mod+Shift+$kleft move left
+bindsym $mod+Shift+$kdown move down
+bindsym $mod+Shift+$kup move up
+bindsym $mod+Shift+$kright move right
+
+	# Alternatively, you can use the cursor keys:
+	bindsym $mod+Shift+Left move left
+	bindsym $mod+Shift+Down move down
+	bindsym $mod+Shift+Up move up
+	bindsym $mod+Shift+Right move right
+
+## Spliting
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Split in horizontal orientation
+bindsym $mod+Shift+v split h
+
+## Fullscreen
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+## Layout
+# Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+## Tiling/Floating
+# Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Kill focused container
+bindsym $mod+Shift+q kill
+
+#################################
+#	Resizing containers	#
+#################################
+# Resize window (you can also use the mouse for that)
+mode "resize" {
+	# These bindings trigger as soon as you enter the resize mode
+
+	# Pressing left will shrink the window’s width.
+	# Pressing right will grow the window’s width.
+	# Pressing up will shrink the window’s height.
+	# Pressing down will grow the window’s height.
+	bindsym $kleft resize shrink width 5 px or 5 ppt
+	bindsym $kdown resize grow height 5 px or 5 ppt
+	bindsym $kup resize shrink height 5 px or 5 ppt
+	bindsym $kright resize grow width 5 px or 5 ppt
+
+		# same bindings, but for the arrow keys
+		bindsym Left resize shrink width 5 px or 5 ppt
+		bindsym Down resize grow height 5 px or 5 ppt
+		bindsym Up resize shrink height 5 px or 5 ppt
+		bindsym Right resize grow width 5 px or 5 ppt
+
+	# back to normal: Enter or Escape or $mod+r
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+r mode "default"
+}
+
+# Start resize mode
+bindsym $mod+r mode "resize"
+
+#################################
+#	Aesthetics		#
+#################################
+# Color palette
+set_from_resource $fg i3wm.color0 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+# Set wallpaper variables
+set $wallpaper_path = /home/agony/Pictures/wallpapers/pixelwallpaper#03.png
+
+# Uses pywal to define theme colors based on $wallpaper
+exec_always wal -i /home/agony/Pictures/wallpapers/pixelwallpaper#03.png -g
+
+# Sets wallpaper using feh
+exec_always feh --bg-scale /home/agony/Pictures/wallpapers/pixelwallpaper#03.png
+
+# Sets telegram color palette using wal-telegram
+exec_always /home/agony/.config/wal-telegram/wal-telegram 
+
+# Custom Colors
+	# class                 border  backgr. text indicator child_border
+	client.focused          $bg     $bg     $bg  $bg       $bg
+	client.focused_inactive $fg     $fg     $fg  $bg       $fg
+	client.unfocused        $fg     $fg     $fg  $bg       $fg
+	client.urgent           $bg     $bg     $bg  $bg       $bg
+	client.placeholder      $fg     $fg     $fg  $bg       $fg
+
+	client.background       $bg
+
+# i3-gaps configuration
+gaps inner 4
+
+# Borders
+default_border pixel 4
+
+# Start polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+#################################
+#	Scratchpad		#
+#################################
+# Move focused window to scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+#################################
+#	Autostart programs	#
+#################################
+# Syncthing daemon
+# I use syncthing to sync files between various devices, this way I have it
+# always running
+exec syncthing
+
+# Tray Applets
+exec nm-applet
+exec blueman-applet
+exec keepassxc
+
+#################################
+#   Custom container placing	#
+#################################
+# Assign applications to workspaces
+assign [class="TelegramDesktop"] $ws0
+assign [class="Evince"] $ws1
+assign [class="Firefox"] $ws2
+assign [class="Thunar"] $ws4
+
+# Set floating windows
+for_window[class="keepassxc"] floating enable
+for_window[class="feh"] floating enable
+for_window[class="gnuplot_qt"] floating enable
+for_window[class="Pavucontrol"] floating enable
+
+#################################
+#	Custom shortcuts	#
+#################################
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec pamixer -i 5 # Increase volume in 5%
+bindsym XF86AudioLowerVolume exec pamixer -d 5 # Decrease volume in 5%
+bindsym XF86AudioMute exec pamixer -m #Mute volume
+
+# Sreen brightness controls
+exec light -S 50
+bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+
+# Screenshots
+bindsym $mod+Print exec maim | xclip -selection clipboard -t image/png #[Maim option using xdotool]
+bindsym $mod+shift+Print exec maim -s | xclip -selection clipboard -t image/png
+
+# File manager
+bindsym $mod+shift+a exec thunar
+
