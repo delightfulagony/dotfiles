@@ -1,0 +1,106 @@
+! Color palette
+! This will be overwritten by pywal
+! In case pywal breaks
+
+	! special
+*.foreground:   #757664
+*.background:   #052621
+*.cursorColor:  #dddddd
+
+	! black
+*.color0:       #151515
+*.color8:       #555555
+
+	! red
+*.color1:       #9e4a4d
+*.color9:       #9e4a4d
+
+	! green
+*.color2:       #cb484d
+*.color10:      #cb484d
+
+	! yellow
+*.color3:       #a1cfce
+*.color11:      #a1cfce
+
+	! blue
+*.color4:       #9e7374
+*.color12:      #9e7374
+
+	! magenta
+*.color5:       #d6a04d
+*.color13:      #d6a04d
+
+	! cyan
+*.color6:       #fd9d9f
+*.color14:      #fda0a0
+
+	! white
+*.color7:       #f5deb3
+*.color15:      #ffffff
+
+
+! Rofi
+rofi.color-enabled: true
+rofi.color-window: #07322B, #07322B, #07322B
+rofi.color-normal: #07322B, #747661, #07322B, #747661, #07322B
+rofi.color-active: #07322B, #929D7F, #07322B, #929D7F, #07322B
+rofi.color-urgent: #07322B, #747661, #07322B, #747661, #07322B
+
+! URxvt
+	! URxvt font, it will try to use them in order
+URxvt*font:		xft:Source Code Pro:pixelsize=14, xft:Noto Emoji:pixelsize=14
+URxvt*geometry:		112x22
+
+	! Hide scrollbar
+URxvt*scrollBar:	false
+URxvt*scrollBar_right:	true
+URxvt*scrollColor:	#000000
+
+URxvt.internalBorder:	1
+URxvt.letterSpace:	-1
+URxvt*depth:		32
+	! Allow transparency (Compton needed)
+URxvt*transparent:	true
+URxvt*shading:		10
+	! Background color (Overwritten by pywal)
+URxvt*background:	rgba:0500/2600/2100/E500
+
+URxvt.iso14755:		False
+
+	! Copy/paste to clipboard
+!URxvt.perl-ext-common: selection-to-clipboard
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.perl-ext-common:	default,clipboards
+
+	! Clickable URLs
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt*urlLauncher:	firefox
+
+	! Coloured URLs
+URxvt.matcher.rend.0: Uline Bold #07322B
+
+	! Allowing color in urxvt
+URxvt*.termName: rxvt-unicode-256color
+
+Xft*dpi:		96
+Xft*antialias:		true
+Xft*hinting:		full
+
+! Xterm
+xterm*dynamicColors::	true
+xterm*background::	 black
+xterm*foreground::	white
+xterm*utf8::		2
+xterm*eightBitInput::	true
+xterm*saveLines::	32767
+xterm*scrollTtyKeypress::	true
+xterm*scrollTtyOutput::		false
+xterm*scrollBar::		false
+xterm*loginShell::		true
+xterm*faceName::		Monospace:pixelsize=11
+xterm*jumpScroll::		true
+xterm*multiScroll::		true
+xterm*toolBar::			false
