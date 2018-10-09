@@ -226,13 +226,13 @@ set_from_resource $fg i3wm.color0 #f0f0f0
 set_from_resource $bg i3wm.color2 #f0f0f0
 
 # Set wallpaper variables
-set $wallpaper_path = /home/agony/Pictures/wallpapers/pixelwallpaper#03.png
+set $wallpaper_path = $HOME/Pictures/wallpapers/pixelwallpaper#03.png
 
 # Uses pywal to define theme colors based on $wallpaper
-exec_always wal -i /home/agony/Pictures/wallpapers/pixelwallpaper#03.png -g
+exec_always wal -i $HOME/Pictures/wallpapers/pixelwallpaper#03.png -g
 
 # Sets wallpaper using feh
-exec_always feh --bg-scale /home/agony/Pictures/wallpapers/pixelwallpaper#03.png
+exec_always feh --bg-scale $HOME/Pictures/wallpapers/pixelwallpaper#03.png
 
 # Sets telegram color palette using wal-telegram
 exec_always /home/agony/.config/wal-telegram/wal-telegram 
