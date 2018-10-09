@@ -9,6 +9,7 @@ My personal configuration files
 - [Polybar](https://github.com/jaagr/polybar)
 - [Rofi](https://github.com/DaveDavenport/rofi)
 - [Compton](https://github.com/chjj/compton)
+- [pywal](https://github.com/dylanaraps/pywal)
 
 #### Fonts
 - [Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
