@@ -1,3 +1,27 @@
+"=======================================
+"
+" Copyright:
+" 	2018 delightfulagony
+"
+" Author:
+" 	delightfulagony
+" 	agony.root@protonmail.com
+" 	https://github.com/delightfulagony/
+"
+" Original repo:
+" 	https://github.com/delightfulagony/dotfiles
+"
+" Disclaimer:
+" 	This config file is intended to work with various pieces of software
+" 	specified in:
+" 	https://github.com/delightfulagony/dotfiles/blob/master/README.md#Dependencies
+"
+" LICENSE:
+" 	This file is licensed under the MIT License
+" 	(https://opensource.org/licenses/MIT)
+"
+"=======================================
+
 " Specify a directory for plugins 
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
