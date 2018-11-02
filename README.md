@@ -24,6 +24,12 @@ My personal configuration files
 - [vim-plug](https://github.com/junegunn/vim-plug)
 - [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 
+#### Telegram
+- [wal-telegram](https://github.com/matteoguarda/wal-telegram)
+
+#### Steam
+- [wal_steam](https://github.com/kotajacob/wal_steam)
+
 ## Install script
 I have not written a install script just yet, will upload it as soon as I have 
 it.
