@@ -33,3 +33,6 @@ My personal configuration files
 ## Install script
 I have not written a install script just yet, will upload it as soon as I have 
 it.
+
+## TO-DO
+Use Stow to manage this repo
