@@ -1,0 +1,86 @@
+#!/bin/bash
+#                                :
+#                               t#,     L.
+#                        .Gt   ;##W.    EW:        ,ft
+#             ..        j#W:  :#L:WE    E##;       t#E f.     ;WE.
+#            ;W,      ;K#f   .KG  ,#D   E###t      t#E E#,   i#G
+#           j##,    .G#D.    EE    ;#f  E#fE#f     t#E E#t  f#f
+#          G###,   j#K;     f#.     t#i E#t D#G    t#E E#t G#i
+#        :E####, ,K#f   ,GD;:#G     GK  E#t  f#E.  t#E E#jEW,
+#       ;W#DG##,  j#Wi   E#t ;#L   LW.  E#t   t#K: t#E E##E.
+#      j###DW##,   .G#D: E#t  t#f f#:   E#t    ;#W,t#E E#G
+#     G##i,,G##,     ,K#fK#t   f#D#;    E#t     :K#D#E E#t
+#   :K#K:   L##,       j###t    G#t     E#t      .E##E E#t
+#  ;##D.    L##,        .G#t     t      ..         G#E EE.
+#  ,,,      .,,           ;;                        fE t
+#                                                    ,
+
+connected_monitors=$(xrandr | grep " connected " | awk '{ print$1 }')
+current=$(autorandr | grep "(current)" | cut -d" " -f1)
+lid=$(cat /proc/acpi/button/lid/LID/state | awk '{print$2}')
+
+if [[ $connected_monitors =~ "DP-3" && $lid == "open" ]]; then
+ autorandr docked
+ bspc monitor "DP-3" -d "〇" "一" "二" "三" "四" "五" "六" "七" "八" "九" "十"
+ bspc monitor "eDP-1" -d "十一" "十二" "十三" "十四" "十五"
+elif [[ $connected_monitors =~ "DP-3" && $lid == "closed" ]]; then
+ autorandr folded
+ bspc monitor "DP-3" -d "〇" "一" "二" "三" "四" "五" "六" "七" "八" "九" "十"
+ bspc monitor "eDP-1" -r
+elif [[ $connected_monitors =~ "eDP-1" ]]; then
+ autorandr clone-largest
+ bspc monitor "eDP-1" -d "〇" "一" "二" "三" "四" "五" "六" "七" "八" "九" "十"
+ bspc monitor "DP-3" -r
+else
+ autorandr clone-largest
+ bspc monitor -d "〇" "一" "二" "三" "四" "五" "六" "七" "八" "九" "十"
+fi
+
+# For some reason the keyboard layout always reset to us
+setxkbmap es
+
+# Launch keyboard shortcuts program {sxhkd}
+if [[ $(pgrep sxhkd) != "" ]]; then
+	pkill -SIGUSR1 sxhkd
+else
+	sxhkd &
+fi
+
+# Launch compositor {picom}
+picom -b &
+
+# Launch notification daemon {dunst}
+dunst &
+
+# Launch top bar {polybar}
+$HOME/.config/polybar/launch.sh &
+
+# Set wallpaper
+hsetroot -cover ~/.wallpaper.png
+
+# Launch password-store
+if [[ $(pgrep keepassxc) == "" \
+	|| $(pgrep keepassxc) == $(pgrep keepassxc-proxy) ]]; then
+	keepassxc &
+fi
+
+bspc config border_width  4
+bspc config window_gap    0
+
+bspc config split_ratio               0.55
+bspc config borderless_monocle        false
+bspc config gapless_monocle           true
+bspc config pointer_follows_focus     false
+bspc config pointer_follows_monitor   false
+bspc config click_to_focus            true
+bspc config focus_follows_pointer     true
+bspc config remove_disabled_monitors  true
+bspc config remove_unplugged_monitors true
+
+# Colorscheme
+bspc config normal_border_color   "#1f1f1f"
+bspc config focused_border_color  "#96c5bc"
+
+bspc rule -a firefox desktop="^3"
+bspc rule -a telegram-desktop desktop="^2"
+bspc rule -a "Password Dialog" state=floating
